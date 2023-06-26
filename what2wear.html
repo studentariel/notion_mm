@@ -33,7 +33,7 @@ function weatherAdvice(weatherData) {
   let advice = '';
 
   if (temperature >= 30) {
-    advice = "It's going to be a hot one! Wear sunscreen, sunglasses and bring water.";
+    advice = "It's going to be a hot one! Wear sunscreen, sunglasses, and bring water.";
   } else if (temperature < 10) {
     advice = "Brr! It's cold. Wear warm layers.";
   } else if (weatherCondition.includes('Clear')) {
@@ -43,7 +43,7 @@ function weatherAdvice(weatherData) {
   } else if (weatherCondition.includes('Cloud')) {
     advice = "Overcast. Wear sunscreen, and bring sunglasses just in case.";
   } else if (weatherCondition.includes('Snow')) {
-    advice = "The weather app is confused because it thinks it's snowing!";
+    advice = "The weather app is confused because it think's it's snowing!";
   } else if (weatherCondition.includes('Windy')) {
     advice = "It's windy. Bring a jacket.";
   } else {
@@ -61,12 +61,11 @@ function weatherAdvice(weatherData) {
   </script>
 </head>
 <body>
-  <h1>Weather Advice:</h1>
   <p id="weather-advice"></p>
   
   <script>
     // Replace the coordinates with your desired location
-    displayWeatherAdvice(32.8328, -117.2713);
+    displayWeatherAdvice(32.839983, --117.271506);
   </script>
 </body>
 </html>
