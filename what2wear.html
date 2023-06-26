@@ -8,7 +8,7 @@
     async function getWeather(lat, lon) {
       try {
         const apiKey = '0a8a39dd6f944bb9827224945232606';
-        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&aqi=no`;
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -25,23 +25,29 @@
 
 function weatherAdvice(weatherData) {
   if (!weatherData) {
-    return "Error fetching weather data. Please check the console for more information.";
+    return "Oops! There's an error with the weather data. Ask an adult for help.";
   }
 
-  const temperature = weatherData.main.temp;
-  const weatherCondition = weatherData.weather[0].main;
+  const temperature = weatherData.current.temp_c;
+  const weatherCondition = weatherData.current.condition.text;
   let advice = '';
 
   if (temperature >= 30) {
-    advice = "It's hot, wear sunscreen and a hat.";
-  } else if (weatherCondition === 'Clear') {
-    advice = "It's sunny, wear sunscreen and sunglasses.";
+    advice = "It's going to be a hot one! Wear sunscreen, sunglasses and bring water.";
   } else if (temperature < 10) {
-    advice = "It's chilly, wear a jacket.";
-  } else if (weatherCondition === 'Clouds' || weatherCondition === 'Rain') {
-    advice = "The weather may change, bring layers.";
+    advice = "Brr! It's cold. Wear warm layers.";
+  } else if (weatherCondition.includes('Clear')) {
+    advice = "The sun is out. Wear sunscreen, sunglasses, and a hat.";
+  } else if (weatherCondition.includes('Rain')) {
+    advice = "It's raining. Bring an umbrella.";
+  } else if (weatherCondition.includes('Cloud')) {
+    advice = "Overcast. Wear sunscreen, and bring sunglasses just in case.";
+  } else if (weatherCondition.includes('Snow')) {
+    advice = "The weather app is confused because it thinks it's snowing!";
+  } else if (weatherCondition.includes('Windy')) {
+    advice = "It's windy. Bring a jacket.";
   } else {
-    advice = "Check the weather for more details.";
+    advice = "It's a beautiful day! Get out there and enjoya La Jolla!";
   }
 
   return advice;
@@ -55,7 +61,7 @@ function weatherAdvice(weatherData) {
   </script>
 </head>
 <body>
-  <h1>What to wear:</h1>
+  <h1>Weather Advice:</h1>
   <p id="weather-advice"></p>
   
   <script>
