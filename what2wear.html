@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Advice</title>
+  <script>
+    async function getWeather(lat, lon) {
+      try {
+        const apiKey = '0a8a39dd6f944bb9827224945232606';
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+        return null;
+      }
+    }
+
+function weatherAdvice(weatherData) {
+  if (!weatherData) {
+    return "Error fetching weather data. Please check the console for more information.";
+  }
+
+  const temperature = weatherData.main.temp;
+  const weatherCondition = weatherData.weather[0].main;
+  let advice = '';
+
+  if (temperature >= 30) {
+    advice = "It's hot, wear sunscreen and a hat.";
+  } else if (weatherCondition === 'Clear') {
+    advice = "It's sunny, wear sunscreen and sunglasses.";
+  } else if (temperature < 10) {
+    advice = "It's chilly, wear a jacket.";
+  } else if (weatherCondition === 'Clouds' || weatherCondition === 'Rain') {
+    advice = "The weather may change, bring layers.";
+  } else {
+    advice = "Check the weather for more details.";
+  }
+
+  return advice;
+}
+
+    async function displayWeatherAdvice(lat, lon) {
+      const weatherData = await getWeather(lat, lon);
+      const advice = weatherAdvice(weatherData);
+      document.getElementById('weather-advice').innerText = advice;
+    }
+  </script>
+</head>
+<body>
+  <h1>What to wear:</h1>
+  <p id="weather-advice"></p>
+  
+  <script>
+    // Replace the coordinates with your desired location
+    displayWeatherAdvice(32.8328, -117.2713);
+  </script>
+</body>
+</html>
