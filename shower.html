@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Shower Widget</title>
+    <style>  
+      #shower-widget {
+        font-size: 2rem; 
+      }
+    </style>
+  </head>
+  <body>
+    <div id="shower-widget"> 
+    </div>   
+
+    <script>
+      function updateShowerWidget() {
+        var day = new Date().getDate();
+        var message;
+        if (day % 2 == 1) {
+          message = "Today is a shower day."; 
+        } else {
+          message = "Today is NOT a shower day." 
+        }
+        document.querySelector('#shower-widget').innerHTML = message;
+      } 
+
+      updateShowerWidget();  
+      setInterval(updateShowerWidget, 1000 * 60 * 60 * 24); 
+    </script>
+  </body>
+</html>
