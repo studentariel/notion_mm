@@ -5,7 +5,9 @@
     <title>Shower Widget</title>
     <style>  
       #shower-widget {
-        font-size: 2rem; 
+        font-size: 2rem;
+        color: #fff; 
+        background: #000; 
       }
     </style>
   </head>
@@ -23,10 +25,10 @@
           message = "Today is NOT a shower day." 
         }
         document.querySelector('#shower-widget').innerHTML = message;
-      } 
+      }   
 
-      updateShowerWidget();  
-      setInterval(updateShowerWidget, 1000 * 60 * 60 * 24); 
+      updateShowerWidget();    
+      setInterval(updateShowerWidget, 1000 * 60 * 60 * 24);
     </script>
   </body>
 </html>
