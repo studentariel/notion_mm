@@ -58,8 +58,8 @@
                 document.getElementById('countdown').innerHTML = `Time remaining: ${minutes}:${seconds.toString().padStart(2, "0")}`;
                 document.getElementById('endTime').innerHTML = `End time: ${endTime.toLocaleTimeString()}`;
             }
-            localStorage.setItem('timeUntilBreak', document.getElementById('countdown').innerHTML);
-            localStorage.setItem('breakEndTime', document.getElementById('endTime').innerHTML);
+            localStorage.setItem('timeUntilBreak', `${minutes}:${seconds.toString().padStart(2, "0")}`);
+            localStorage.setItem('breakEndTime', endTime.toLocaleTimeString());        
         }
 
         function stopTimer() {
