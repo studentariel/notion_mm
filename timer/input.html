@@ -33,6 +33,13 @@
             document.getElementById('customMinutes').value = minutes;
         }
 
+        function sendMessage(action, data) {
+            const outputWindow = window.open('', 'output');
+            if (outputWindow) {
+                outputWindow.postMessage({ action, data }, '*');
+            }
+        }
+
         function startTimer() {
             let minutes = parseInt(document.getElementById('customMinutes').value);
             if (isNaN(minutes)) {
@@ -42,12 +49,8 @@
             let now = new Date();
             endTime = new Date(now.getTime() + minutes * 60000);
             if (countdown) clearInterval(countdown);
-
-            // Update localStorage with the initial values
-            localStorage.setItem('timeUntilBreak', `${minutes}:00`);
-            localStorage.setItem('breakEndTime', endTime.toLocaleTimeString());
-
             countdown = setInterval(updateTimer, 1000);
+            sendMessage('start', { timeUntilBreak: `${minutes}:00`, breakEndTime: endTime.toLocaleTimeString() });
         }
 
         function updateTimer() {
@@ -64,23 +67,20 @@
                 document.getElementById('endTime').innerHTML = `End time: ${endTime.toLocaleTimeString()}`;
             }
 
-            // Store only the remaining time value without the "Time remaining" text
-            localStorage.setItem('timeUntilBreak', `${minutes}:${seconds.toString().padStart(2, "0")}`);
-            localStorage.setItem('breakEndTime', endTime.toLocaleTimeString());
+            // Send update message to the output window
+            sendMessage('update', { timeUntilBreak: `${minutes}:${seconds.toString().padStart(2, "0")}`, breakEndTime: endTime.toLocaleTimeString() });
         }
 
         function stopTimer() {
             clearInterval(countdown);
-            localStorage.removeItem('timeUntilBreak');
-            localStorage.removeItem('breakEndTime');
+            sendMessage('stop');
         }
 
         function clearTimer() {
             clearInterval(countdown);
             document.getElementById('countdown').innerHTML = "";
             document.getElementById('endTime').innerHTML = "";
-            localStorage.removeItem('timeUntilBreak');
-            localStorage.removeItem('breakEndTime');
+            sendMessage('clear');
         }
     </script>
 </body>
