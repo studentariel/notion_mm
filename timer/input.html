@@ -66,12 +66,16 @@
 
         function stopTimer() {
             clearInterval(countdown);
+            localStorage.removeItem('timeUntilBreak');
+            localStorage.removeItem('breakEndTime');
         }
 
         function clearTimer() {
             clearInterval(countdown);
             document.getElementById('countdown').innerHTML = "";
             document.getElementById('endTime').innerHTML = "";
+            localStorage.removeItem('timeUntilBreak');
+            localStorage.removeItem('breakEndTime');
         }
     </script>
 </body>
