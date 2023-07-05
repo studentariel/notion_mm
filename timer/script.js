@@ -24,6 +24,9 @@ startButton.addEventListener('click', () => {
         const end = new Date(now.getTime() + selectedTime * 60 * 1000);
         timerDisplay.style.display = 'block';
         backButton.style.display = 'inline-block';
+        // Hide timer options and start button
+        document.getElementById('timer-options').style.display = 'none';
+        startButton.style.display = 'none';
 
         timer = setInterval(() => {
             const currentTime = new Date();
@@ -54,17 +57,21 @@ backButton.addEventListener('click', () => {
     timerDisplay.style.display = 'none';
     timeRemaining.textContent = '';
     endTime.textContent = '';
+    // Show timer options and start button
+    document.getElementById('timer-options').style.display = 'flex';
+    startButton.style.display = 'inline-block';
 });
 
 function formatTime(milliseconds) {
     const minutes = Math.floor(milliseconds / (60 * 1000));
     const seconds = Math.floor((milliseconds % (60 * 1000)) / 1000);
-    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    return `${minutes}:${seconds < 10 ? '0': ''}${seconds}`;
 }
 
 function formatEndTime(date) {
-    const hours = date.getHours() % 12 || 12;
+    const hours = date.getHours();
     const minutes = date.getMinutes();
-    const ampm = date.getHours() >= 12 ? 'pm' : 'am';
-    return `${hours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+    const amPm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12;
+    return `${formattedHours}:${minutes < 10 ? '0' : ''}${minutes} ${amPm}`;
 }
