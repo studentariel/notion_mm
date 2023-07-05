@@ -38,3 +38,18 @@ body {
     display: none;
     margin-top: 1rem;
 }
+/* Add the following CSS rules */
+.custom-time {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+#custom-duration {
+    width: 60px;
+    margin-right: 0.5rem;
+}
+
+#selected-duration {
+    margin-bottom: 1rem;
+}
