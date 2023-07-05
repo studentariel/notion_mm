@@ -16,7 +16,12 @@
             <button class="time-option" data-time="20">20 min</button>
             <button class="time-option" data-time="25">25 min</button>
             <button class="time-option" data-time="30">30 min</button>
+            <div class="custom-time">
+                <input type="number" id="custom-duration" min="1" placeholder="Custom (mins)">
+                <button id="set-custom-duration">Set</button>
+            </div>
         </div>
+        <p id="selected-duration"></p>
         <div class="timer-controls">
             <button id="start">Start</button>
             <button id="stop">Stop</button>
