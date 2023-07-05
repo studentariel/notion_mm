@@ -2,7 +2,7 @@ const timeOptions = document.querySelectorAll('.time-option');
 const customDurationInput = document.getElementById('custom-duration');
 const setCustomDurationButton = document.getElementById('set-custom-duration');
 const startButton = document.getElementById('start');
-const stopButton = document.getElementById('stop');
+const pauseButton = document.getElementById('pause');
 const clearButton = document.getElementById('clear');
 const backButton = document.getElementById('back');
 const timeRemaining = document.getElementById('time-remaining');
@@ -40,10 +40,10 @@ startButton.addEventListener('click', () => {
         const end = new Date(now.getTime() + selectedTime * 60 * 1000);
         backButton.style.display = 'inline-block';
         timerDisplay.style.display = 'block';
-        // Hide timer options and start button
         document.getElementById('timer-options').style.display = 'none';
         startButton.style.display = 'none';
         selectedDurationDisplay.style.display = 'none';
+        pauseButton.style.display = 'inline-block';
 
         timer = setInterval(() => {
             const currentTime = new Date();
@@ -58,14 +58,18 @@ startButton.addEventListener('click', () => {
     }
 });
 
-stopButton.addEventListener('click', () => {
+pauseButton.addEventListener('click', () => {
     clearInterval(timer);
+    pauseButton.style.display = 'none';
+    startButton.style.display = 'inline-block';
 });
 
 clearButton.addEventListener('click', () => {
     clearInterval(timer);
     timeRemaining.textContent = '';
     endTime.textContent = '';
+    pauseButton.style.display = 'none';
+    startButton.style.display = 'inline-block';
 });
 
 backButton.addEventListener('click', () => {
@@ -74,8 +78,8 @@ backButton.addEventListener('click', () => {
     timerDisplay.style.display = 'none';
     timeRemaining.textContent = '';
     endTime.textContent = '';
-    // Show timer options and start button
     document.getElementById('timer-options').style.display = 'flex';
+    pauseButton.style.display = 'none';
     startButton.style.display = 'inline-block';
     selectedDurationDisplay.style.display = 'block';
 });
@@ -97,3 +101,4 @@ function formatEndTime(date) {
 const timerDisplay = document.querySelector('.timer-display');
 timerDisplay.style.display = 'none';
 backButton.style.display = 'none';
+pauseButton.style.display = 'none';
