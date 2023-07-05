@@ -50,6 +50,8 @@ startButton.addEventListener('click', () => {
             const diff = end - currentTime;
             if (diff <= 0) {
                 clearInterval(timer);
+                pauseButton.style.display = 'none';
+                startButton.style.display = 'inline-block';
             } else {
                 timeRemaining.textContent = formatTime(diff);
                 endTime.textContent = formatEndTime(end);
