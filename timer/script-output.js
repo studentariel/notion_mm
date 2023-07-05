@@ -1,11 +1,10 @@
-// script-output.js
-
-const countdownDisplay = document.getElementById('countdown');
-const endTimeDisplay = document.getElementById('endTime');
-
 const urlParams = new URLSearchParams(window.location.search);
 const endTimeParam = urlParams.get('endTime');
+
 const endTime = endTimeParam ? new Date(endTimeParam) : null;
+const countdownDisplay = document.getElementById('countdown');
+
+let timerInterval = null;
 
 function updateDisplay() {
   if (endTime) {
@@ -18,15 +17,11 @@ function updateDisplay() {
       const secondsLeft = (timeLeft % 60).toString().padStart(2, '0');
       countdownDisplay.textContent = `${minutesLeft}:${secondsLeft}`;
     }
-
-    endTimeDisplay.textContent = endTime.toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
   } else {
     countdownDisplay.textContent = '00:00';
-    endTimeDisplay.textContent = '00:00';
   }
 }
 
-setInterval(updateDisplay, 1000);
+if (endTime) {
+  timerInterval = setInterval(updateDisplay, 1000);
+}
