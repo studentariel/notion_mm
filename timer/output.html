@@ -21,15 +21,15 @@
 
             document.getElementById('timeRemaining').innerHTML = timeRemainingValue
                 ? `Time remaining: ${timeRemainingValue}`
-                : "Time remaining:";
+                : "No timer running";
 
             document.getElementById('timeUntilBreak').innerHTML = timeRemainingValue
                 ? `Time until Mommy's next break: ${timeRemainingValue}`
-                : "Time until Mommy's next break:";
+                : "No timer running";
 
             document.getElementById('breakEndTime').innerHTML = breakEndTimeValue
                 ? `End time: ${breakEndTimeValue}`
-                : "End time:";
+                : "No timer running";
         }
 
         setInterval(updateOutput, 1000);
