@@ -15,8 +15,16 @@
 
     <script>
         function updateOutput() {
-            document.getElementById('timeUntilBreak').innerHTML = localStorage.getItem('timeUntilBreak') || "Time until Mommy's next break:";
-            document.getElementById('breakEndTime').innerHTML = localStorage.getItem('breakEndTime') || "End time:";
+            const timeUntilBreakValue = localStorage.getItem('timeUntilBreak');
+            const breakEndTimeValue = localStorage.getItem('breakEndTime');
+            
+            document.getElementById('timeUntilBreak').innerHTML = timeUntilBreakValue
+                ? `Time until Mommy's next break: ${timeUntilBreakValue}`
+                : "Time until Mommy's next break:";
+                
+            document.getElementById('breakEndTime').innerHTML = breakEndTimeValue
+                ? `End time: ${breakEndTimeValue}`
+                : "End time:";
         }
 
         setInterval(updateOutput, 1000);
