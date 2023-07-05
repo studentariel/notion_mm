@@ -42,6 +42,11 @@
             let now = new Date();
             endTime = new Date(now.getTime() + minutes * 60000);
             if (countdown) clearInterval(countdown);
+
+            // Update localStorage with the initial values
+            localStorage.setItem('timeUntilBreak', `${minutes}:00`);
+            localStorage.setItem('breakEndTime', endTime.toLocaleTimeString());
+
             countdown = setInterval(updateTimer, 1000);
         }
 
