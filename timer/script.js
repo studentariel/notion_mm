@@ -2,7 +2,7 @@ const timeOptions = document.querySelectorAll('.time-option');
 const customDurationInput = document.getElementById('custom-duration');
 const setCustomDurationButton = document.getElementById('set-custom-duration');
 const startButton = document.getElementById('start');
-const pauseButton = document.getElementById('pause');
+const pauseButton = document.getElementById('stop'); // This should be 'stop' instead of 'pause'
 const clearButton = document.getElementById('clear');
 const backButton = document.getElementById('back');
 const timeRemaining = document.getElementById('time-remaining');
@@ -11,7 +11,6 @@ const selectedDurationDisplay = document.getElementById('selected-duration');
 
 let selectedTime = 0;
 let timer;
-
 function displaySelectedDuration() {
     selectedDurationDisplay.textContent = selectedTime > 0 ? `Selected duration: ${selectedTime} min` : '';
 }
