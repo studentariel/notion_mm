@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Timer Input Widget</title>
+  <title>Timer</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,6 +22,12 @@
     <button id="stopTimer">Stop Timer</button>
     <button id="clearTimer">Clear Timer</button>
   </div>
-  <script src="script-input.js"></script> <!-- Update the script reference here -->
+  <div class="timer-output-widget">
+    <h1>Time Remaining</h1>
+    <div id="countdown">00:00</div>
+    <h2>Ends at</h2>
+    <div id="endTime">00:00</div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
