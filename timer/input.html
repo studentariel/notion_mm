@@ -9,17 +9,16 @@
 <body>
   <div class="timer-input-widget">
     <h1>Set Timer</h1>
-    <input type="number" id="customTime" placeholder="Enter time in minutes">
-    <div class="preset-buttons">
-      <button class="preset" data-time="5">5 mins</button>
-      <button class="preset" data-time="10">10 mins</button>
-      <button class="preset" data-time="15">15 mins</button>
-      <button class="preset" data-time="20">20 mins</button>
-      <button class="preset" data-time="25">25 mins</button>
-      <button class="preset" data-time="30">30 mins</button>
-    </div>
+    <input type="text" id="customTime" placeholder="Enter minutes">
+    <br>
+    <button class="preset" data-time="1">1 min</button>
+    <button class="preset" data-time="5">5 min</button>
+    <button class="preset" data-time="10">10 min</button>
+    <br>
     <button id="startTimer">Start Timer</button>
+    <button id="stopTimer">Stop Timer</button>
+    <button id="clearTimer">Clear Timer</button>
   </div>
-  <script src="script-input.js"></script> <!-- Update the script reference here -->
+  <script src="script-input.js"></script>
 </body>
 </html>
