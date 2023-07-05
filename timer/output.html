@@ -14,56 +14,12 @@
     </div>
 
     <script>
-        let countdown;
-let endTime;
+        function updateOutput() {
+            document.getElementById('timeUntilBreak').innerHTML = localStorage.getItem('timeUntilBreak') || "Time until Mommy's next break:";
+            document.getElementById('breakEndTime').innerHTML = localStorage.getItem('breakEndTime') || "End time:";
+        }
 
-function setTime(minutes) {
-    document.getElementById('customMinutes').value = minutes;
-}
-
-function startTimer() {
-    let minutes = parseInt(document.getElementById('customMinutes').value);
-    if (isNaN(minutes)) {
-        alert("Please enter a valid time.");
-        return;
-    }
-    let now = new Date();
-    endTime = new Date(now.getTime() + minutes * 60000);
-    if (countdown) clearInterval(countdown);
-    countdown = setInterval(updateTimer, 1000);
-}
-
-function updateTimer() {
-    let now = new Date();
-    let diff = endTime - now;
-    if (diff <= 0) {
-        clearInterval(countdown);
-        document.getElementById('countdown').innerHTML = "Time's up!";
-        document.getElementById('endTime').innerHTML = "";
-    } else {
-        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        let seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        document.getElementById('countdown').innerHTML = `Time remaining: ${minutes}:${seconds.toString().padStart(2, "0")}`;
-        document.getElementById('endTime').innerHTML = `End time: ${endTime.toLocaleTimeString()}`;
-    }
-}
-
-function stopTimer() {
-    clearInterval(countdown);
-}
-
-function clearTimer() {
-    clearInterval(countdown);
-    document.getElementById('countdown').innerHTML = "";
-    document.getElementById('endTime').innerHTML = "";
-}
-function updateOutput() {
-    document.getElementById('timeUntilBreak').innerHTML = localStorage.getItem('timeUntilBreak') || "Time until Mommy's next break:";
-    document.getElementById('breakEndTime').innerHTML = localStorage.getItem('breakEndTime') || "End time:";
-}
-
-setInterval(updateOutput, 1000);
-}
+        setInterval(updateOutput, 1000);
     </script>
 </body>
 </html>
