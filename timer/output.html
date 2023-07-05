@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Timer Output Widget</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="timer-output-widget">
-    <h1>Timer Countdown</h1>
-    <div class="timer-display">
-      <p>Time until Mommy's next break: <span id="countdown">00:00</span></p>
-      <p>Timer will be finished at: <span id="endTime">00:00</span></p>
-    </div>
-  </div>
-  <script src="script.js"></script>
-</body>
-</html>
+const customTimeInput = document.getElementById('customTime');
+const presetButtons = document.querySelectorAll('.preset');
+const startTimerButton = document.getElementById('startTimer');
+
+presetButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    customTimeInput.value = button.dataset.time;
+  });
+});
+
+startTimerButton.addEventListener('click', () => {
+  const timerDuration = customTimeInput.value;
+
+  if (timerDuration) {
+    const now = new Date();
+    const endTime = new Date(now.getTime() + timerDuration * 60000);
+    window.location.href = `output.html?endTime=${endTime.toISOString()}`;
+  }
+});
