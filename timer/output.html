@@ -9,19 +9,24 @@
 </head>
 <body>
     <div id="output">
+        <div id="timeRemaining">Time remaining:</div>
         <div id="timeUntilBreak">Time until Mommy's next break:</div>
         <div id="breakEndTime">End time:</div>
     </div>
 
     <script>
         function updateOutput() {
-            const timeUntilBreakValue = localStorage.getItem('timeUntilBreak');
+            const timeRemainingValue = localStorage.getItem('timeUntilBreak');
             const breakEndTimeValue = localStorage.getItem('breakEndTime');
-            
-            document.getElementById('timeUntilBreak').innerHTML = timeUntilBreakValue
-                ? `Time until Mommy's next break: ${timeUntilBreakValue}`
+
+            document.getElementById('timeRemaining').innerHTML = timeRemainingValue
+                ? `Time remaining: ${timeRemainingValue}`
+                : "Time remaining:";
+
+            document.getElementById('timeUntilBreak').innerHTML = timeRemainingValue
+                ? `Time until Mommy's next break: ${timeRemainingValue}`
                 : "Time until Mommy's next break:";
-                
+
             document.getElementById('breakEndTime').innerHTML = breakEndTimeValue
                 ? `End time: ${breakEndTimeValue}`
                 : "End time:";
