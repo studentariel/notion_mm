@@ -9,30 +9,24 @@
 </head>
 <body>
     <div id="output">
-        <div id="timeRemaining">Time remaining:</div>
-        <div id="timeUntilBreak">Time until Mommy's next break:</div>
-        <div id="breakEndTime">End time:</div>
+        <div id="timeRemaining">No timer running</div>
+        <div id="timeUntilBreak">No timer running</div>
+        <div id="breakEndTime">No timer running</div>
     </div>
 
     <script>
-        function updateOutput() {
-            const timeRemainingValue = localStorage.getItem('timeUntilBreak');
-            const breakEndTimeValue = localStorage.getItem('breakEndTime');
-
-            document.getElementById('timeRemaining').innerHTML = timeRemainingValue
-                ? `Time remaining: ${timeRemainingValue}`
-                : "No timer running";
-
-            document.getElementById('timeUntilBreak').innerHTML = timeRemainingValue
-                ? `Time until Mommy's next break: ${timeRemainingValue}`
-                : "No timer running";
-
-            document.getElementById('breakEndTime').innerHTML = breakEndTimeValue
-                ? `End time: ${breakEndTimeValue}`
-                : "No timer running";
-        }
-
-        setInterval(updateOutput, 1000);
+        window.addEventListener('message', (event) => {
+            const { action, data } = event.data;
+            if (action === 'start' || action === 'update') {
+                document.getElementById('timeRemaining').innerHTML = `Time remaining: ${data.timeUntilBreak}`;
+                document.getElementById('timeUntilBreak').innerHTML = `Time until Mommy's next break: ${data.timeUntilBreak}`;
+                document.getElementById('breakEndTime').innerHTML = `End time: ${data.breakEndTime}`;
+            } else if (action === 'stop' || action === 'clear') {
+                document.getElementById('timeRemaining').innerHTML = "No timer running";
+                document.getElementById('timeUntilBreak').innerHTML = "No timer running";
+                document.getElementById('breakEndTime').innerHTML = "No timer running";
+            }
+        });
     </script>
 </body>
 </html>
