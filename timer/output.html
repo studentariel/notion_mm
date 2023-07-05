@@ -57,6 +57,13 @@ function clearTimer() {
     document.getElementById('countdown').innerHTML = "";
     document.getElementById('endTime').innerHTML = "";
 }
+function updateOutput() {
+    document.getElementById('timeUntilBreak').innerHTML = localStorage.getItem('timeUntilBreak') || "Time until Mommy's next break:";
+    document.getElementById('breakEndTime').innerHTML = localStorage.getItem('breakEndTime') || "End time:";
+}
+
+setInterval(updateOutput, 1000);
+}
     </script>
 </body>
 </html>
