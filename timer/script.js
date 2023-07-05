@@ -5,7 +5,6 @@ const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
 const clearButton = document.getElementById('clear');
 const backButton = document.getElementById('back');
-const timerDisplay = document.querySelector('.timer-display');
 const timeRemaining = document.getElementById('time-remaining');
 const endTime = document.getElementById('end-time');
 const selectedDurationDisplay = document.getElementById('selected-duration');
@@ -39,8 +38,8 @@ startButton.addEventListener('click', () => {
     if (selectedTime > 0) {
         const now = new Date();
         const end = new Date(now.getTime() + selectedTime * 60 * 1000);
-        timerDisplay.style.display = 'block';
         backButton.style.display = 'inline-block';
+        timerDisplay.style.display = 'block';
         // Hide timer options and start button
         document.getElementById('timer-options').style.display = 'none';
         startButton.style.display = 'none';
@@ -94,3 +93,7 @@ function formatEndTime(date) {
     const formattedHours = hours % 12 || 12;
     return `${formattedHours}:${minutes < 10 ? '0' : ''}${minutes} ${amPm}`;
 }
+
+const timerDisplay = document.querySelector('.timer-display');
+timerDisplay.style.display = 'none';
+backButton.style.display = 'none';
