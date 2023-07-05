@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Timer Input Widget</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Add your styles here */
+    </style>
 </head>
 <body>
-  <div class="timer-input-widget">
-    <h1>Set Timer</h1>
-    <input type="text" id="customTime" placeholder="Enter minutes">
-    <br>
-    <button class="preset" data-time="1">1 min</button>
-    <button class="preset" data-time="5">5 min</button>
-    <button class="preset" data-time="10">10 min</button>
-    <br>
-    <button id="startTimer">Start Timer</button>
-    <button id="stopTimer">Stop Timer</button>
-    <button id="clearTimer">Clear Timer</button>
-  </div>
-  <script src="script-input.js"></script>
+    <div id="timer">
+        <input type="number" id="customMinutes" placeholder="MM" min="0">
+        <div id="quickTimes">
+            <button onclick="setTime(5)">5</button>
+            <button onclick="setTime(10)">10</button>
+            <button onclick="setTime(15)">15</button>
+            <button onclick="setTime(20)">20</button>
+            <button onclick="setTime(25)">25</button>
+            <button onclick="setTime(30)">30</button>
+        </div>
+        <button id="startBtn" onclick="startTimer()">Start</button>
+        <button id="stopBtn" onclick="stopTimer()">Stop</button>
+        <button id="clearBtn" onclick="clearTimer()">Clear</button>
+        <div id="countdown"></div>
+        <div id="endTime"></div>
+    </div>
+
+    <script>
+        // Add your JavaScript code here
+    </script>
 </body>
 </html>
