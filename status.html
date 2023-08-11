@@ -1,50 +1,39 @@
-# GUI for Status Update
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mommy Status Widget</title>
+</head>
+<body>
+  <div id="status-container">
+    <div id="status-label"></div>
+    <div id="button-frame">
+      <button id="red-button" onclick="updateStatus('red', 'Mommy is: Focused - emergencies only.')">Focus</button>
+      <button id="green-button" onclick="updateStatus('green', 'Mommy is: available - text or talking')">Free</button>
+      <button id="yellow-button" onclick="updateStatus('yellow', 'Mommy is: working - send a request or text')">Working</button>
+      <button id="reset-button" onclick="resetStatus()">Reset</button>
+    </div>
+  </div>
 
-This is a simple GUI application created with Python's tkinter module. The purpose of this application is to allow a user to display their current status (Busy, Free, or Busy Send Text) by clicking a button. After a button is clicked, the status is displayed on the screen and the status buttons disappear, replaced by a Reset button. The Reset button will clear the displayed status and bring back the status buttons.
+  <script>
+    function updateStatus(color, text, fontcolor) {
+      document.getElementById('status-container').style.backgroundColor = color;
+      document.getElementById('status-label').innerHTML = text;
+      document.getElementById('status-label').style.color = fontcolor;
+      document.getElementById('red-button').style.display = 'none';
+      document.getElementById('green-button').style.display = 'none';
+      document.getElementById('yellow-button').style.display = 'none';
+      document.getElementById('reset-button').style.display = 'block';
+    }
 
-## Requirements
-
-Python 3.x and tkinter module.
-
-## Code
-
-```python
-import tkinter as tk
-
-def update_status(color, text, fontcolor):
-    root.configure(background=color)
-    status_label.config(text=text, fg=fontcolor, bg=color, font=("Helvetica", 12, "bold"))
-    red_button.pack_forget()
-    green_button.pack_forget()
-    yellow_button.pack_forget()
-    reset_button.pack(side=tk.LEFT)
-
-def reset_status():
-    root.configure(background='white')
-    status_label.config(text="", bg='white', font=("Helvetica", 12))
-    red_button.pack(side=tk.LEFT)
-    green_button.pack(side=tk.LEFT)
-    yellow_button.pack(side=tk.LEFT)
-    reset_button.pack_forget()
-
-root = tk.Tk()
-root.geometry('200x200')
-
-status_label = tk.Label(root, text="", bg='white')
-status_label.pack()
-
-button_frame = tk.Frame(root)
-button_frame.pack()
-
-red_button = tk.Button(button_frame, text="Busy", command=lambda: update_status('red', 'Mommy is: Busy - emergencies only.', 'white'), height = 1, width = 10)
-red_button.pack(side=tk.LEFT)
-
-green_button = tk.Button(button_frame, text="Free", command=lambda: update_status('green', 'Mommy is: Available - text or talking', 'white'), height = 1, width = 10)
-green_button.pack(side=tk.LEFT)
-
-yellow_button = tk.Button(button_frame, text="Busy, Send Text", command=lambda: update_status('yellow', 'Mommy is: Busy- send a request or text', 'black'), height = 1, width = 10)
-yellow_button.pack(side=tk.LEFT)
-
-reset_button = tk.Button(button_frame, text="Reset", command=reset_status, height = 1, width = 10)
-
-root.mainloop()
+    function resetStatus() {
+      document.getElementById('status-container').style.backgroundColor = 'white';
+      document.getElementById('status-label').innerHTML = '';
+      document.getElementById('status-label').style.color = 'black';
+      document.getElementById('red-button').style.display = 'block';
+      document.getElementById('green-button').style.display = 'block';
+      document.getElementById('yellow-button').style.display = 'block';
+      document.getElementById('reset-button').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
