@@ -7,9 +7,9 @@
   <div id="status-container">
     <div id="status-label"></div>
     <div id="button-frame">
-      <button id="red-button" onclick="updateStatus('red', 'Mommy is: Focused - emergencies only.')">Focus</button>
-      <button id="green-button" onclick="updateStatus('green', 'Mommy is: available - text or talking')">Free</button>
-      <button id="yellow-button" onclick="updateStatus('yellow', 'Mommy is: working - send a request or text')">Working</button>
+      <button id="red-button" onclick="updateStatus('red', 'Mommy is: Focused - emergencies only.', 'white')">Focus</button>
+      <button id="green-button" onclick="updateStatus('green', 'Mommy is: available - text or talking', 'white')">Free</button>
+      <button id="yellow-button" onclick="updateStatus('yellow', 'Mommy is: working - send a request or text', 'black')">Working</button>
       <button id="reset-button" onclick="resetStatus()">Reset</button>
     </div>
   </div>
@@ -18,6 +18,7 @@
     function updateStatus(color, text, fontcolor) {
       document.getElementById('status-container').style.backgroundColor = color;
       document.getElementById('status-label').innerHTML = text;
+      document.getElementById('status-label').style.fontWeight = 'bold';
       document.getElementById('status-label').style.color = fontcolor;
       document.getElementById('red-button').style.display = 'none';
       document.getElementById('green-button').style.display = 'none';
