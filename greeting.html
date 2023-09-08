@@ -63,6 +63,10 @@
             font-size: 1em;
             display: inline-block;
         }
+      
+        .ampm {
+            font-size: 0.4em; /* Adjust this value as needed */
+        }
 
      
 
@@ -134,11 +138,11 @@ function dispalyGreetings(today){
         var seconds = padZeros(today.getSeconds());
        
          if(today.getHours() >=12){
-        minutes+=" pm"
-    }
-    else{
-        minutes+=" am"
-    }
+            minutes+=" <span class='ampm'>pm</span>"
+      }
+          else{
+            minutes+=" <span class='ampm'>am</span>"
+      }
        
         document.getElementById('hour').innerHTML = hour;
         document.getElementById('min').innerHTML = minutes;
