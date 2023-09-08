@@ -38,53 +38,54 @@ async function getWeather(lat, lon) {
   }
 }
 
-    function weatherAdvice(weatherData) {
-      if (!weatherData) {
-        return "Oops! There's an error with the weather data. Ask an adult for help.";
-      }
+function weatherAdvice(weatherData) {
+  if (!weatherData) {
+    return {
+      advice: "Oops! There's an error with the weather data. Ask an adult for help."
+    };
+  }
 
-      const temperatureF = weatherData.current.temp_f;
-      const isRaining = weatherData.current.condition.text.toLowerCase().includes('rain');
-      const currentHour = new Date().getHours();
-      const isNight = currentHour >= 19;
-      const airQuality = weatherData.current.air_quality.pm2_5;
-      const windSpeed = weatherData.current.wind_kph;
-      const weatherCondition = weatherData.current.condition.text;
-    
-      const advice65To70 = [
-          "The sun has set, but don't forget to stay hydrated even in cooler temperatures.",
-          "After 7 PM, the UV index is usually low.",
-          "It’s after sunset. If it's a clear night, don't forget to take a moment to enjoy the stars."
-       ]; 
-    
-      const advice64AndBelow = [
-          "It's chilly tonight, wear your gloves and coat.",
-          "Nighttime is here. There's a chill in the air, consider wearing layers to stay warm."
-       ];
+  const temperatureF = weatherData.current.temp_f;
+  const isRaining = weatherData.current.condition.text.toLowerCase().includes('rain');
+  const currentHour = new Date().getHours();
+  const isNight = currentHour >= 19;
+  const airQuality = weatherData.current.air_quality.pm2_5;
+  const windSpeed = weatherData.current.wind_kph;
+  const weatherCondition = weatherData.current.condition.text;
 
-      const adviceRain = [
-          "I know you might not believe me, but it’s rainy, bring your umbrella and waterproof jacket."
-       ];
-    
-      const advice71AndAbove = [
-          "The sun has set, but if the weather is still hot, consider dressing in cool clothing, including wearing sunglasses at night.",
-          "It’s nighttime, but it’s still hot. Be sure to stay hydrated."
-       ];
-    
-    
-    let advice = '';
-    
-    if (isNight) {
-          if (isRaining) {
-            advice = adviceRain[Math.floor(Math.random() * adviceRain.length)];
-          } else if (temperatureF >= 71) {
-            advice = advice71AndAbove[Math.floor(Math.random() * advice71AndAbove.length)];
-          } else if (temperatureF <= 64) {
-            advice = advice64AndBelow[Math.floor(Math.random() * advice64AndBelow.length)];
-          } else if (temperatureF >= 65 && temperatureF <= 70) {
-            advice = advice65To70[Math.floor(Math.random() * advice65To70.length)];
-          }
-    } else {
+  const advice65To70 = [
+    "The sun has set, but don't forget to stay hydrated even in cooler temperatures.",
+    "After 7 PM, the UV index is usually low.",
+    "It’s after sunset. If it's a clear night, don't forget to take a moment to enjoy the stars."
+  ]; 
+
+  const advice64AndBelow = [
+    "It's chilly tonight, wear your gloves and coat.",
+    "Nighttime is here. There's a chill in the air, consider wearing layers to stay warm."
+  ];
+
+  const adviceRain = [
+    "I know you might not believe me, but it’s rainy, bring your umbrella and waterproof jacket."
+  ];
+
+  const advice71AndAbove = [
+    "The sun has set, but if the weather is still hot, consider dressing in cool clothing, including wearing sunglasses at night.",
+    "It’s nighttime, but it’s still hot. Be sure to stay hydrated."
+  ];
+
+  let advice = '';
+
+  if (isNight) {
+    if (isRaining) {
+      advice = adviceRain[Math.floor(Math.random() * adviceRain.length)];
+    } else if (temperatureF >= 71) {
+      advice = advice71AndAbove[Math.floor(Math.random() * advice71AndAbove.length)];
+    } else if (temperatureF <= 64) {
+      advice = advice64AndBelow[Math.floor(Math.random() * advice64AndBelow.length)];
+    } else if (temperatureF >= 65 && temperatureF <= 70) {
+      advice = advice65To70[Math.floor(Math.random() * advice65To70.length)];
+    }
+  } else {
         if (temperatureF >= 32) {
           advice = "It's going to be a hot one! Stay hydrated, take breaks in the shade, avoid overexertion, wear sunscreen, lightweight and light-colored clothing, sunglasses, and a hat. Limit time outside during peak heat hours.";
         } else if (temperatureF >= 27) {
@@ -122,33 +123,69 @@ async function getWeather(lat, lon) {
         }
       }
 
-      return advice;
-    }
+    return {
+      advice,
+      isNight,
+      isRaining,
+      temperatureF,
+      airQuality,
+      windSpeed,
+      weatherCondition
+    };
+  }
+}
     
-    async function displayWeatherAdvice(lat, lon) {
-      console.log("Fetching weather data...");
-      const weatherData = await getWeather(lat, lon);
-      console.log("Weather data fetched:", weatherData);
-      
-      const currentHour = new Date().getHours();
-      const isNight = currentHour >= 19;
-    
-      console.log("Generating weather advice...");
-      const advice = weatherAdvice(weatherData, isNight);
-      console.log("Weather advice:", advice);
-      
-      document.getElementById('weather-advice').innerText = advice;
+async function displayWeatherAdvice(lat, lon) {
+  try {
+    console.log("Fetching weather data...");
+    const weatherData = await getWeather(lat, lon);
+    console.log("Weather data fetched:", weatherData);
+
+    if (!weatherData) {
+      throw new Error("Failed to fetch weather data.");
     }
 
-function weatherAdvice(weatherData, isNight) {
+    console.log("Generating weather advice...");
+
+    const { 
+      advice, 
+      isNight, 
+      isRaining, 
+      temperatureF, 
+      airQuality, 
+      windSpeed, 
+      weatherCondition 
+    } = weatherAdvice(weatherData);
+
+    console.log("Weather advice:", advice);
+    console.log("isNight:", isNight);
+    console.log("isRaining:", isRaining);
+    console.log("temperatureF:", temperatureF);
+    console.log("airQuality:", airQuality);
+    console.log("windSpeed:", windSpeed);
+    console.log("weatherCondition:", weatherCondition);
+
+    const weatherAdviceElement = document.getElementById('weather-advice');
+    
+    if (!weatherAdviceElement) {
+      throw new Error("Element with id 'weather-advice' not found.");
+    }
+
+    weatherAdviceElement.innerText = advice;
+  } catch (error) {
+    console.error("Error in displayWeatherAdvice:", error);
+  }
+}
   </script>
 </head>
 <body>
   <p id="weather-advice"></p>
   
-  <script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
     // Replace the coordinates with your desired location
-    displayWeatherAdvice(32.840003, --117.271478);
-  </script>
+    displayWeatherAdvice(32.840003, -117.271478);
+  });
+</script>
 </body>
 </html>
