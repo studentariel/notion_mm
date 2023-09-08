@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #countdown {
+      font-size: 25px;
+      margin-top: 20%;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown">
+    Days until Dylan's 11th Birthday:
+    <span id="days"></span>
+  </div>
+  
+  <script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("Oct 8, 2023 00:00:00").getTime();
+
+    // Get today's date and time
+    var now = new Date().getTime();
+
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for days
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    // Display the result in the element with id="days"
+    document.getElementById("days").innerHTML = days;
+
+    // Get the current time and calculate the time until next midnight
+    var current = new Date();
+    var nextMidnight = new Date(current.getFullYear(), current.getMonth(), current.getDate()+1, 0, 0, 0) - current;
+
+    // Refresh the page at next midnight
+    setTimeout(function(){
+      location = ''
+    }, nextMidnight);
+  </script>
+</body>
+</html>
