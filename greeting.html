@@ -17,7 +17,7 @@
         }
 
         .widget {
-            padding: 70px 5px ;
+            padding: 5px 5px ;
             color: white;
             display: flex;
             justify-content:center;
@@ -25,7 +25,7 @@
             flex-direction: column;
             max-width: 99%;
             margin: auto;
-            border: 2px solid gray;
+            border: 0px solid gray;
             border-radius: 5px;
             box-shadow: 2px 2px 1px 0px #000000;
 
@@ -39,7 +39,7 @@
 
         .date {
              font-family: monospace;
-             font-size: 7em;
+             font-size: 6em;
              margin: 0;
              padding: 0.1 em 0;
              line-height: 0.9
@@ -51,7 +51,7 @@
               font-size: 20em;
               margin: 0;
               padding: 0.1 em 0;
-              line-height: 0.9
+              line-height: 0.7
         }
 
         .time {
@@ -100,7 +100,7 @@
 
 function dispalyGreetings(today){
         hrs = today.getHours();
-        name="RAAD FAM"
+        name="RAAD Family"
         if (hrs < 12)
             greet = 'Good Morning  '+name;
         else if (hrs >= 12 && hrs <= 17)
