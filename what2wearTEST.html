@@ -126,8 +126,12 @@ async function getWeather(lat, lon) {
     }
     
     async function displayWeatherAdvice(lat, lon) {
+      console.log("Fetching weather data..."); // New
       const weatherData = await getWeather(lat, lon);
+      console.log("Weather data fetched:", weatherData); // New
+      console.log("Generating weather advice..."); // New
       const advice = weatherAdvice(weatherData);
+      console.log("Weather advice:", advice); // New
       document.getElementById('weather-advice').innerText = advice;
     }
   </script>
