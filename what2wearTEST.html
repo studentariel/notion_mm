@@ -126,6 +126,12 @@ async function getWeather(lat, lon) {
     }
     
     async function displayWeatherAdvice(lat, lon) {
+      console.log("isNight:", isNight);
+      console.log("isRaining:", isRaining);
+      console.log("temperatureF:", temperatureF);
+      console.log("airQuality:", airQuality);
+      console.log("windSpeed:", windSpeed);
+      console.log("weatherCondition:", weatherCondition);
       console.log("Fetching weather data..."); // New
       const weatherData = await getWeather(lat, lon);
       console.log("Weather data fetched:", weatherData); // New
