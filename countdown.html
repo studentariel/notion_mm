@@ -2,6 +2,10 @@
 <html>
 <head>
   <style>
+    body {
+      background-color: black;
+      color: white;
+    }
     #countdown {
       font-size: 25px;
       margin-top: 20%;
@@ -11,10 +15,7 @@
   </style>
 </head>
 <body>
-  <div id="countdown">
-    Days until Dylan's 11th Birthday:
-    <span id="days"></span>
-  </div>
+  <div id="countdown"></div>
   
   <script>
     // Set the date we're counting down to
@@ -29,8 +30,14 @@
     // Time calculations for days
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 
-    // Display the result in the element with id="days"
-    document.getElementById("days").innerHTML = days;
+    // Check if the birthday has arrived
+    if (days > 0) {
+      // Display the countdown
+      document.getElementById("countdown").innerHTML = days + " days until Dylan's 11th Birthday";
+    } else {
+      // Display the birthday message
+      document.getElementById("countdown").innerHTML = "Happy Birthday Dylan!!";
+    }
 
     // Get the current time and calculate the time until next midnight
     var current = new Date();
