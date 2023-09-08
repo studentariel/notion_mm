@@ -16,18 +16,18 @@
     </div>   
 
     <script>
-      function updatePooprWidget() {
+      function updatePoopWidget() {
         var day = new Date().getDate();
         var message;
         if (day % 2 == 1) {
-          message = "Today is a 💩 day."; 
+          message = "✅ Today is a 💩 day."; 
         } else {
-          message = "Today is NOT a 💩 day." 
+          message = "🚫 Today is NOT a 💩 day." 
         }
-        document.querySelector('#Poop-widget').innerHTML = message;
+        document.querySelector('#poop-widget').innerHTML = message;
       }   
 
-      updatePooprWidget();    
+      updatePoopWidget();    
       setInterval(updatePoopWidget, 1000 * 60 * 60 * 24);
     </script>
   </body>
