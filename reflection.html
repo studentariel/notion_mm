@@ -1,1 +1,212 @@
+<!--
+  ########################################################
+  #                                                      #
+  #  IMPORTANT NOTE:                                     #
+  #  This is the greeting clock code.                    #
+  #                                                      #
+  ########################################################
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greetings</title>
 
+    <style>
+
+
+        body{
+            font-variant-caps: all-petite-caps;
+            background-color: black;
+            color: white;
+
+
+        }
+
+        .widget {
+            padding: 5px 5px ;
+            color: white;
+            display: flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction: column;
+            max-width: 95%;
+            margin: auto;
+            border: 3px solid white;
+            border-radius: 5px;
+            box-shadow: 2px 2px 1px 0px #000000;
+
+        }
+
+           
+        .greet{
+            font-size: 2em;
+        }
+
+        .date {
+      
+            font-family: monospace;
+            font-size: 4em;
+        }
+
+        .clock {
+            font-family: "Times New Roman", Times, serif;
+            font-weight: bold;
+            font-size: 10em;
+        }
+
+        .time {
+            display: inline-block;
+            min-width: 10px;
+        }
+
+        .colon {
+            font-size: 1em;
+            display: inline-block;
+        }
+
+     
+
+
+
+
+    </style>
+</head>
+<body>
+
+
+
+
+<div class="container>">
+    <div class="widget">
+
+            <div class="greet" id="greet"></div>
+
+                <div class="date" id="date"></div>
+                <div class="clock">
+    <div class="time" id="hour"></div>
+    <div class="colon">:</div>
+    <div class="time" id="min"></div>  
+</div>
+           
+
+        
+
+    </div>
+</div>
+        
+
+
+
+<script>
+
+function dispalyGreetings(today){
+        hrs = today.getHours();
+        name="RAAD FAM"
+        if (hrs < 12)
+            greet = 'Good Morning  '+name;
+        else if (hrs >= 12 && hrs <= 17)
+            greet = 'Good Afternoon '+name;
+        else if (hrs >= 17 && hrs <= 24)
+            greet = 'Good Evening  '+name;
+        document.getElementById('greet').innerHTML = greet;
+
+    }
+
+    function dispalyDate(today) {  
+       
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+        var dayName = days[today.getDay()];
+        var monthName = monthNames[today.getMonth()];
+        var date = today.getDate();
+        var year = today.getFullYear();
+        document.getElementById('date').innerHTML =dayName+", "+monthName+" "+date+" "+year;
+
+    }
+
+
+    function dispalyClock(today) {
+
+        var hour = padZeros(twelveHour(today.getHours()));
+        var minutes = padZeros(today.getMinutes());
+        var seconds = padZeros(today.getSeconds());
+       
+         if(today.getHours() >=12){
+        minutes+=" pm"
+    }
+    else{
+        minutes+=" am"
+    }
+       
+        document.getElementById('hour').innerHTML = hour;
+        document.getElementById('min').innerHTML = minutes;
+       
+    }
+
+    function twelveHour(hour) {
+        if (hour > 12) {
+            return hour -= 12
+        } else if (hour === 0) {
+            return hour = 12;
+        } else {
+            return hour
+        }
+    }
+    function padZeros(num) {
+        if (num < 10) {
+            num = '0' + num
+        };
+        return num;
+    }
+
+    function dispalyWidget() {
+        var today = new Date();
+        dispalyGreetings(today);
+        dispalyDate(today);
+        dispalyClock(today);
+        setTimeout(dispalyWidget, 500);
+    }
+
+    dispalyWidget()
+
+</script>
+</body>
+
+
+<!--
+  ########################################################
+  #                                                      #
+  #  IMPORTANT NOTE:                                     #
+  #  This is the weather code.                           #
+  #                                                      #
+  ########################################################
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather Widget</title>
+<style>
+  .weatherwidget-io {
+    pointer-events: none;
+    /* Scale the widget to be 2 times larger */
+    transform: scale(2);
+  }
+</style>
+</head>
+<body>
+
+<a class="weatherwidget-io" href="https://forecast7.com/en/32d83n117d26/92037/?unit=us" data-label_1="La Jolla" data-label_2="Weather" data-mode="Current" data-days="3" data-theme="dark" >La Jolla Weather</a>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script>
+
+</body>
+</html>
