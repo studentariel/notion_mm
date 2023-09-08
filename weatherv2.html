@@ -1,4 +1,35 @@
-<a class="weatherwidget-io" href="https://forecast7.com/en/32d83n117d26/92037/?unit=us" data-font="Roboto Slab" data-icons="Climacons Animated" data-mode="Current" data-theme="weather_one" >La Jolla, CA 92037, USA</a>
-<script>
-!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.row {
+  display: flex;
+}
+.column {
+  flex: 50%;
+}
+.column.left {
+  max-width: 300px;
+  overflow: hidden; /* Add this to prevent the widget from spilling over */
+  transform: scale(2); /* Add this to scale the widget down to 80% of its original size */
+  transform-origin: top left; /* This ensures the widget scales from the top left corner */
+}
+</style>
+</head>
+<body>
+
+<div class="row">
+  <div class="column left">
+    <a class="weatherwidget-io" href="https://forecast7.com/en/32d83n117d26/92037/?unit=us" data-font="Roboto Slab" data-icons="Climacons Animated" data-mode="Current" data-theme="weather_one" >La Jolla, CA 92037, USA</a>
+    <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+    </script>
+  </div>
+  
+  <div class="column right">
+    <!-- Place your second widget code here -->
+  </div>
+</div>
+
+</body>
+</html>
