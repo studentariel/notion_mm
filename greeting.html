@@ -17,15 +17,15 @@
         }
 
         .widget {
-            padding: 5px 5px ;
+            padding: 70px 5px ;
             color: white;
             display: flex;
             justify-content:center;
             align-items:center;
             flex-direction: column;
-            max-width: 95%;
+            max-width: 99%;
             margin: auto;
-            border: 3px solid white;
+            border: 2px solid gray;
             border-radius: 5px;
             box-shadow: 2px 2px 1px 0px #000000;
 
@@ -33,19 +33,25 @@
 
            
         .greet{
-            font-size: 2em;
+             font-family: Times New Roman;  
+             font-size: 3em;
         }
 
         .date {
-      
-            font-family: monospace;
-            font-size: 4em;
+             font-family: monospace;
+             font-size: 7em;
+             margin: 0;
+             padding: 0.1 em 0;
+             line-height: 0.9
         }
 
         .clock {
-            font-family: "Times New Roman", Times, serif;
-            font-weight: bold;
-            font-size: 10em;
+              font-family: "Times New Roman", Times, serif;
+              font-weight: bold;
+              font-size: 20em;
+              margin: 0;
+              padding: 0.1 em 0;
+              line-height: 0.9
         }
 
         .time {
@@ -74,9 +80,8 @@
     <div class="widget">
 
             <div class="greet" id="greet"></div>
-
-                <div class="date" id="date"></div>
-                <div class="clock">
+            <div class="date" id="date"></div>
+            <div class="clock">
     <div class="time" id="hour"></div>
     <div class="colon">:</div>
     <div class="time" id="min"></div>  
