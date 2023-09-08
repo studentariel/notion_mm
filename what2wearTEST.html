@@ -126,20 +126,21 @@ async function getWeather(lat, lon) {
     }
     
     async function displayWeatherAdvice(lat, lon) {
-      console.log("isNight:", isNight);
-      console.log("isRaining:", isRaining);
-      console.log("temperatureF:", temperatureF);
-      console.log("airQuality:", airQuality);
-      console.log("windSpeed:", windSpeed);
-      console.log("weatherCondition:", weatherCondition);
-      console.log("Fetching weather data..."); // New
+      console.log("Fetching weather data...");
       const weatherData = await getWeather(lat, lon);
-      console.log("Weather data fetched:", weatherData); // New
-      console.log("Generating weather advice..."); // New
-      const advice = weatherAdvice(weatherData);
-      console.log("Weather advice:", advice); // New
+      console.log("Weather data fetched:", weatherData);
+      
+      const currentHour = new Date().getHours();
+      const isNight = currentHour >= 19;
+    
+      console.log("Generating weather advice...");
+      const advice = weatherAdvice(weatherData, isNight);
+      console.log("Weather advice:", advice);
+      
       document.getElementById('weather-advice').innerText = advice;
     }
+
+function weatherAdvice(weatherData, isNight) {
   </script>
 </head>
 <body>
