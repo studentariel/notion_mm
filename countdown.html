@@ -5,10 +5,12 @@
     body {
       background-color: black;
       color: white;
-    }
-    #countdown {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       font-size: 25px;
-      margin-top: 20%;
       text-align: center;
       font-weight: bold;
     }
@@ -33,7 +35,7 @@
     // Check if the birthday has arrived
     if (days > 0) {
       // Display the countdown
-      document.getElementById("countdown").innerHTML = days + " days until Dylan's 11th Birthday!";
+      document.getElementById("countdown").innerHTML = days + " days until Dylan's 11th Birthday";
     } else {
       // Display the birthday message
       document.getElementById("countdown").innerHTML = "Happy Birthday Dylan!!";
