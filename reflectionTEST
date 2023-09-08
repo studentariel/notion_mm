@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>REFLECTION TEST</title>
+    <style>
+        body {
+            background-color: black;
+            color: white; /* This will make the text color white, for visibility against the black background */
+        }
+        iframe {
+            border: none; /* This removes the border */
+        }
+        hr {
+            border: none;
+            border-top: 1px solid white;
+            color: white;
+            background-color: white;
+        }
+    
+    </style>
+  </head>
+<body>
+    <body style="background-color: black; color: white;">
+    <!-- This is where you include the widget -->
+    <iframe src="https://studentariel.github.io/notion_mm/greeting.html" width="1220" height="330"></iframe>
+    <iframe src="https://studentariel.github.io/notion_mm/weatherv2.html" width="310" height="300"></iframe>
+    <iframe src="https://studentariel.github.io/notion_mm/what2wear.html" width="910" height="300"></iframe>
+    <br>
+    <hr>
+     <iframe src="https://studentariel.github.io/notion_mm/shower.html" width="600" height="100"></iframe>
+    <iframe src="https://studentariel.github.io/notion_mm/sitdown.html" width="600" height="100"></iframe>
+
+</body>
+</html>
