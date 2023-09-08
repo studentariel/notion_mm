@@ -7,6 +7,14 @@
             background-color: black;
             color: white; /* This will make the text color white, for visibility against the black background */
         }
+        body {
+            overflow: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        body::-webkit-scrollbar { /* Chrome, Safari and Opera */
+            display: none;
+        }
         iframe {
             border: none; /* This removes the border */
         }
