@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Advice</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Roboto Slab', serif;
+      font-size: 230%;
+    }
+    p {
+      padding: 20px; /* You can adjust this value as needed */
+    }
+  </style>
+  <script>
+async function getWeather(lat, lon) {
+  try {
+    const apiKey = '0a8a39dd6f944bb9827224945232606';
+    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&aqi=yes`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Weather data:", data); // Log the weather data
+    return data;
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+    return null;
+  }
+}
+
+    function weatherAdvice(weatherData) {
+      if (!weatherData) {
+        return "Oops! There's an error with the weather data. Ask an adult for help.";
+      }
+
+      const temperatureF = weatherData.current.temp_f;
+      const isRaining = weatherData.current.condition.text.toLowerCase().includes('rain');
+      const currentHour = new Date().getHours();
+      const isNight = currentHour >= 19;
+      const airQuality = weatherData.current.air_quality.pm2_5;
+      const windSpeed = weatherData.current.wind_kph;
+      const weatherCondition = weatherData.current.condition.text;
+    
+      const advice65To70 = [
+          "The sun has set, but don't forget to stay hydrated even in cooler temperatures.",
+          "After 7 PM, the UV index is usually low.",
+          "It’s after sunset. If it's a clear night, don't forget to take a moment to enjoy the stars."
+       ]; 
+    
+      const advice64AndBelow = [
+          "It's chilly tonight, wear your gloves and coat.",
+          "Nighttime is here. There's a chill in the air, consider wearing layers to stay warm."
+       ];
+
+      const adviceRain = [
+          "I know you might not believe me, but it’s rainy, bring your umbrella and waterproof jacket."
+       ];
+    
+      const advice71AndAbove = [
+          "The sun has set, but if the weather is still hot, consider dressing in cool clothing, including wearing sunglasses at night.",
+          "It’s nighttime, but it’s still hot. Be sure to stay hydrated."
+       ];
+    
+    
+    let advice = '';
+    
+    if (isNight) {
+          if (isRaining) {
+            advice = adviceRain[Math.floor(Math.random() * adviceRain.length)];
+          } else if (temperatureF >= 71) {
+            advice = advice71AndAbove[Math.floor(Math.random() * advice71AndAbove.length)];
+          } else if (temperatureF <= 64) {
+            advice = advice64AndBelow[Math.floor(Math.random() * advice64AndBelow.length)];
+          } else if (temperatureF >= 65 && temperatureF <= 70) {
+            advice = advice65To70[Math.floor(Math.random() * advice65To70.length)];
+          }
+    } else {
+        if (temperatureF >= 32) {
+          advice = "It's going to be a hot one! Stay hydrated, take breaks in the shade, avoid overexertion, wear sunscreen, lightweight and light-colored clothing, sunglasses, and a hat. Limit time outside during peak heat hours.";
+        } else if (temperatureF >= 27) {
+          advice = "It's hot! Stay hydrated, wear sunscreen, lightweight and light-colored clothing, sunglasses, and a hat. Be cautious of heat rash and sunburn.";
+        } else if (temperatureF >= 18) {
+          advice = "It's mild. Wear sunscreen, comfortable clothing, and consider sunglasses and a hat.";
+        } else if (temperatureF >= 10) {
+          advice = "It's cool. Wear a light jacket, sunscreen, and consider sunglasses and a hat.";
+        } else if (temperatureF < 10) {
+          advice = "Brr! It's cold. Dress in layers, wear a warm jacket, gloves, a scarf, and a hat, and consider sunglasses if it's sunny.";
+        }
+
+        if (weatherCondition.includes('Rain')) {
+          if (weatherData.current.precip_mm < 2.5) {
+            advice += " There's light rain. Wear a water-resistant jacket, and consider an umbrella.";
+          } else {
+            advice += " It's moderate to heavy rain. Wear a rain jacket, waterproof shoes or boots, and use an umbrella.";
+          }
+        }
+
+        if (airQuality >= 151) {
+          advice += " The air quality is unhealthy to hazardous. Avoid outdoor activities and stay indoors.";
+        } else if (airQuality >= 101) {
+          advice += " The air quality is unhealthy for sensitive groups. Limit outdoor activities, especially during peak pollution hours.";
+        }
+
+        if (windSpeed >= 28.8) {
+          advice += " It's a fresh breeze or stronger. Limit outdoor activities, secure loose objects, and be cautious of flying debris.";
+        } else if (windSpeed >= 20.9) {
+          advice += " It's a moderate breeze. Be cautious of debris and wear a windbreaker.";
+        }
+
+        if (advice === '') {
+          advice = "It's a beautiful day! Get out there and enjoy La Jolla!";
+        }
+      }
+
+      return advice;
+    }
+    
+    async function displayWeatherAdvice(lat, lon) {
+      const weatherData = await getWeather(lat, lon);
+      const advice = weatherAdvice(weatherData);
+      document.getElementById('weather-advice').innerText = advice;
+    }
+  </script>
+</head>
+<body>
+  <p id="weather-advice"></p>
+  
+  <script>
+    // Replace the coordinates with your desired location
+    displayWeatherAdvice(32.839983, -117.271506);
+  </script>
+</body>
+</html>
